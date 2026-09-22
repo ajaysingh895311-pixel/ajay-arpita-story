@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #07070d;
+  color: #efe9de;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(228, 201, 143, 0.35);
+  color: #07070d;
+}
+
+/* Visible keyboard focus, kept subtle */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #e4c98f;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.section-shell {
+  position: relative;
+  width: 100%;
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .section-shell {
+    padding: 8rem 2rem;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* thin, elegant scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #07070d;
+}
+::-webkit-scrollbar-thumb {
+  background: #22243f;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
