@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
 import PhotoFrame from './PhotoFrame.jsx'
 
+// Drop your photo at public/images/beginning.jpg and it'll show up here.
+const PHOTO = '/images/beginning.jpg'
+
 export default function Beginning() {
   return (
     <section data-section="beginning" className="section-shell bg-ink-900">
@@ -26,7 +29,7 @@ export default function Beginning() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.15 }}
         >
-          <PhotoFrame label="[Add our first photo here]" className="shadow-card mx-auto max-w-sm" />
+          <PhotoFrame src={PHOTO} label="[Add our first photo here]" className="shadow-card mx-auto max-w-sm" />
         </motion.div>
       </div>
     </section>

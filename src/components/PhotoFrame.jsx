@@ -1,14 +1,24 @@
+import { useState } from 'react'
 import { ImagePlus } from 'lucide-react'
 
 /**
- * Shows `src` if provided, otherwise a quiet placeholder so the site
- * still looks intentional before real photos are added.
+ * Shows `src` if it loads, otherwise a quiet placeholder — so the
+ * site still looks intentional before a real photo is added, and
+ * doesn't show a broken-image icon if the filename is wrong.
  */
 export default function PhotoFrame({ src, alt = '', label, className = '', aspect = 'aspect-[4/5]' }) {
-  if (src) {
+  const [failed, setFailed] = useState(false)
+
+  if (src && !failed) {
     return (
       <div className={`overflow-hidden rounded-2xl ${aspect} ${className}`}>
-        <img src={src} alt={alt} className="h-full w-full object-cover" loading="lazy" />
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-cover"
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
       </div>
     )
   }

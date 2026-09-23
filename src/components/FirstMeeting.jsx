@@ -2,6 +2,9 @@ import { motion } from 'framer-motion'
 import { firstMeeting } from '../data/config.js'
 import PhotoFrame from './PhotoFrame.jsx'
 
+// Drop your Lucknow photo at public/images/lucknow.jpg and it'll show up here.
+const PHOTO = '/images/lucknow.jpg'
+
 export default function FirstMeeting() {
   return (
     <section className="section-shell bg-ink-950">
@@ -12,7 +15,7 @@ export default function FirstMeeting() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
         >
-          <PhotoFrame label="[Add our Lucknow photos here]" aspect="aspect-[4/5]" className="mx-auto max-w-sm shadow-card" />
+          <PhotoFrame src={PHOTO} label="[Add our Lucknow photos here]" aspect="aspect-[4/5]" className="mx-auto max-w-sm shadow-card" />
         </motion.div>
 
         <motion.div
