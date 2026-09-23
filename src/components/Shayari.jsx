@@ -12,7 +12,7 @@ export default function Shayari() {
           transition={{ duration: 0.7 }}
           className="mb-14 text-center font-display text-3xl font-medium text-mist md:text-4xl"
         >
-          Kuch Baatein, Bas Tere Liye
+          Just a Few Things, For You
         </motion.h2>
 
         <div className="space-y-10">

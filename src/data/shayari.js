@@ -8,7 +8,7 @@
 export const shayari = [
   {
     theme: 'Her Smile',
-    lines: ['Tera smile dekh ke,', 'poora din theek lagne lagta hai.'],
+    lines: ['One look at your smile,', 'and the whole day feels a little lighter.'],
   },
   {
     theme: 'Since 2019',
@@ -16,7 +16,7 @@ export const shayari = [
   },
   {
     theme: 'Birthday',
-    lines: ['Duniya ke liye aaj bas ek aur din hai,', 'mere liye, wo din hai jab tu aayi thi.'],
+    lines: ["To the world, today's just another date.", 'To me, it\'s the day you showed up in mine.'],
   },
   {
     theme: 'Through Time',
@@ -24,6 +24,6 @@ export const shayari = [
   },
   {
     theme: "Ajay's Feelings",
-    lines: ['Bolna chahta hoon bahut kuch,', 'par tere saamne aake sab bhool jaata hoon.'],
+    lines: ["There's so much I mean to say,", 'and somehow none of it comes out when I see you.'],
   },
 ]
