@@ -8,22 +8,22 @@
 export const shayari = [
   {
     theme: 'Her Smile',
-    lines: ['Teri muskurahat dekh ke lagta hai,', 'din thoda kam thaka hua hai.'],
+    lines: ['Tera smile dekh ke,', 'poora din theek lagne lagta hai.'],
   },
   {
     theme: 'Since 2019',
-    lines: ['2019 se ab tak,', 'kai mausam badle, par ek cheez nahi —', 'tera saath.'],
+    lines: ['So much has changed since 2019 —', 'except the one thing that mattered: us.'],
   },
   {
     theme: 'Birthday',
-    lines: ['Aaj ke din duniya ko mili thi ek wajah muskurane ki,', 'mujhe mili thi tu.'],
+    lines: ['Duniya ke liye aaj bas ek aur din hai,', 'mere liye, wo din hai jab tu aayi thi.'],
   },
   {
     theme: 'Through Time',
-    lines: ['Waqt badalta rahega,', 'bas yeh haath chhootna nahi chahiye.'],
+    lines: ['Things will keep changing,', "but I don't want to let go of this."],
   },
   {
     theme: "Ajay's Feelings",
-    lines: ['Kehne ko toh bahut kuch hai,', 'par tere saamne har baar shabd kam pad jaate hain.'],
+    lines: ['Bolna chahta hoon bahut kuch,', 'par tere saamne aake sab bhool jaata hoon.'],
   },
 ]
