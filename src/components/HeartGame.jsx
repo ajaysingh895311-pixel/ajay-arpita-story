@@ -9,6 +9,9 @@ const HEART_LIFETIME_MS = 1600
 
 export default function HeartGame() {
   const music = useMusic()
+  const musicRef = useRef(music)
+  musicRef.current = music
+
   const [phase, setPhase] = useState('idle') // idle | playing | done
   const [timeLeft, setTimeLeft] = useState(GAME_SECONDS)
   const [score, setScore] = useState(0)
@@ -27,7 +30,7 @@ export default function HeartGame() {
     setHearts([])
     setTimeLeft(GAME_SECONDS)
     setPhase('playing')
-    music?.duck()
+    musicRef.current?.duck()
 
     spawnRef.current = setInterval(() => {
       const id = idRef.current++
@@ -49,20 +52,22 @@ export default function HeartGame() {
           clearTimers()
           setPhase('done')
           setHearts([])
-          music?.unduck()
+          musicRef.current?.unduck()
           return 0
         }
         return t - 1
       })
     }, 1000)
-  }, [music])
+  }, [])
 
+  // Runs only on unmount — leaving mid-game shouldn't leave the
+  // music permanently ducked.
   useEffect(() => {
     return () => {
       clearTimers()
-      music?.unduck()
+      musicRef.current?.unduck()
     }
-  }, [music])
+  }, [])
 
   const catchHeart = (id) => {
     setHearts((h) => h.filter((x) => x.id !== id))
