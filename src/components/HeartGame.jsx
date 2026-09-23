@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Heart } from 'lucide-react'
+import { useMusic } from '../context/MusicContext.jsx'
 
 const GAME_SECONDS = 20
 const SPAWN_MS = 650
 const HEART_LIFETIME_MS = 1600
 
 export default function HeartGame() {
+  const music = useMusic()
   const [phase, setPhase] = useState('idle') // idle | playing | done
   const [timeLeft, setTimeLeft] = useState(GAME_SECONDS)
   const [score, setScore] = useState(0)
@@ -25,6 +27,7 @@ export default function HeartGame() {
     setHearts([])
     setTimeLeft(GAME_SECONDS)
     setPhase('playing')
+    music?.duck()
 
     spawnRef.current = setInterval(() => {
       const id = idRef.current++
@@ -46,14 +49,20 @@ export default function HeartGame() {
           clearTimers()
           setPhase('done')
           setHearts([])
+          music?.unduck()
           return 0
         }
         return t - 1
       })
     }, 1000)
-  }, [])
+  }, [music])
 
-  useEffect(() => clearTimers, [])
+  useEffect(() => {
+    return () => {
+      clearTimers()
+      music?.unduck()
+    }
+  }, [music])
 
   const catchHeart = (id) => {
     setHearts((h) => h.filter((x) => x.id !== id))
@@ -61,7 +70,7 @@ export default function HeartGame() {
   }
 
   return (
-    <section className="section-shell bg-ink-900">
+    <section data-section="game" className="section-shell bg-ink-900">
       <div className="mx-auto max-w-2xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
@@ -123,8 +132,13 @@ export default function HeartGame() {
               className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-8 text-center"
             >
               <p className="font-display text-xl text-mist">You collected {score} hearts.</p>
+              <p className="font-body text-sm text-mist/50">
+                {score < 12
+                  ? 'You still caught enough hearts to win.'
+                  : 'Okay... you really wanted those hearts. 😂'}
+              </p>
               <p className="max-w-xs font-body text-sm leading-relaxed text-mist/50">
-                But there&rsquo;s one heart you never had to collect —
+                But there&rsquo;s one heart you never had to catch —
                 <span className="block pt-1 font-display italic text-rose-300">mine.</span>
               </p>
               <button

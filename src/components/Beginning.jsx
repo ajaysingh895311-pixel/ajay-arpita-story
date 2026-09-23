@@ -3,7 +3,7 @@ import PhotoFrame from './PhotoFrame.jsx'
 
 export default function Beginning() {
   return (
-    <section className="section-shell bg-ink-900">
+    <section data-section="beginning" className="section-shell bg-ink-900">
       <div className="mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-2 md:gap-16">
         <motion.div
           initial={{ opacity: 0, x: -24 }}

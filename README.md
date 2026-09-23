@@ -7,29 +7,42 @@ A personal, interactive birthday website. Built with React, Vite, Tailwind CSS, 
 ```
 src/
  ├── components/
+ │    ├── SongGate.jsx        "Press play" gate shown before anything else
  │    ├── Hero.jsx            Opening cinematic sequence
+ │    ├── Universe.jsx        5-destination navigation hub
  │    ├── Beginning.jsx       "Where It All Began" section
+ │    ├── LongDistance.jsx    "More Than 4 Years Apart..." chapter
+ │    ├── FirstMeeting.jsx    Meeting in Lucknow — "The Day Distance Lost"
+ │    ├── FirstKiss.jsx       A private, tasteful memory card
  │    ├── Timeline.jsx        "Our Journey" — animated timeline
- │    ├── Memories.jsx        Photo gallery with lightbox
+ │    ├── MemoryGalaxy.jsx    Floating-constellation photo gallery + lightbox
  │    ├── LoveLetters.jsx     Five open-able envelopes
- │    ├── HeartGame.jsx       "Catch My Hearts" mini game
+ │    ├── Shayari.jsx         Original short Hinglish poetry
+ │    ├── OurSong.jsx         "This Song Reminds Me of Us"
+ │    ├── HeartGame.jsx       "Catch My Hearts" mini game (ducks the music)
  │    ├── TimeTogether.jsx    Live years/months/days counter
+ │    ├── BirthdayLock.jsx    Locked chapter that gates BirthdayReveal
  │    ├── BirthdayReveal.jsx  Countdown + birthday-day reveal
  │    ├── FinalLetter.jsx     The closing letter
  │    ├── SecretReveal.jsx    Password-locked final surprise
- │    ├── MusicToggle.jsx     Optional background music button
+ │    ├── MusicToggle.jsx     Floating player (play/pause, seek, volume)
  │    ├── PhotoFrame.jsx      Image w/ graceful placeholder
  │    ├── StarField.jsx       Ambient star background
  │    └── FloatingHearts.jsx  Ambient floating hearts
+ ├── context/
+ │    └── MusicContext.jsx    Shared audio player state (used by several components)
  ├── data/
- │    ├── config.js           Names, key dates, secret answer
+ │    ├── config.js           Names, dates, and all editable section copy
  │    ├── memories.js         Timeline entries
  │    ├── gallery.js          Gallery categories
- │    └── letters.js          The five letters
+ │    ├── letters.js          The five letters
+ │    └── shayari.js          The five short poems
  ├── App.jsx
  ├── main.jsx
  └── index.css
 ```
+
+**A note on the birthday lock:** `src/components/BirthdayLock.jsx` has a `devOverrideEnabled` flag at the top. While it's `true`, tapping the lock icon 5 times quickly previews the birthday reveal early, for testing. Set it to `false` before sending the final link if you'd rather that shortcut not exist.
 
 All the content you'll want to personalize lives in `src/data/` — you shouldn't need to touch component code at all.
 
@@ -79,14 +92,24 @@ Square-ish, well-lit photos work best for the gallery grid. The timeline photos 
 
 ## 4. Add music
 
-1. Drop an MP3 file into `public/music/` and name it `song.mp3` (or update the path in `src/components/MusicToggle.jsx`).
-2. That's it — the 🔇/🔊 button in the bottom-right corner will control it. It starts off, since browsers block autoplaying audio.
+1. Drop an MP3 file into `public/music/` and name it `our-song.mp3` (or change the default in `src/context/MusicContext.jsx`).
+2. On first visit, a "Play Our Song" screen appears — tapping it starts the music (browsers require a tap before audio can play). "Continue without music" skips it.
+3. A small floating player (bottom-right) lets you play/pause, scrub, and adjust volume anywhere on the site. It automatically lowers the volume during the "Catch My Hearts" game and restores it after.
 
-## 5. The secret answer
+## 5. Canva visual assets (optional)
+
+Two starting designs were generated in Canva for this site — a birthday card and a cinematic title graphic. Open them, tweak the wording/colors if you like, then export as JPG:
+
+- **Title graphic** → export and save as `public/images/hero-title.jpg`. The Hero section will automatically use it as a soft background.
+- **Birthday card** → export and save wherever you'd like to keep it (e.g. share it separately as a printable card, or drop it into the gallery).
+
+You can make more of these anytime by asking Claude to generate additional Canva designs for envelopes, timeline decorations, or a QR-code card.
+
+## 6. The secret answer
 
 The final locked section asks "When did our story began?" and expects the digits `16062019` (day-month-year of `storyStartDate`). If you change the story start date, update `secretAnswer` in `src/data/config.js` to match.
 
-## 6. Build for production
+## 7. Build for production
 
 ```bash
 npm run build
@@ -99,7 +122,7 @@ Preview the production build locally before deploying:
 npm run preview
 ```
 
-## 7. Deploy it (so you can send her a link)
+## 8. Deploy it (so you can send her a link)
 
 The easiest free options:
 

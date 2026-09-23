@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import confetti from 'canvas-confetti'
 import StarField from './StarField.jsx'
-import { names, herBirthday } from '../data/config.js'
+import { names, herBirthday, birthdayRevealMessage } from '../data/config.js'
 
 function nextBirthday(mmdd) {
   const [month, day] = mmdd.split('-').map(Number)
@@ -22,8 +22,13 @@ function getRemaining(target) {
   return { days, hours, minutes, seconds }
 }
 
-export default function BirthdayReveal() {
-  const { target, isToday } = useMemo(() => nextBirthday(herBirthday), [])
+/**
+ * `forcePreview` lets BirthdayLock's hidden dev-override show the
+ * reveal state before the real date arrives, for testing.
+ */
+export default function BirthdayReveal({ forcePreview = false }) {
+  const { target, isToday: realIsToday } = useMemo(() => nextBirthday(herBirthday), [])
+  const isToday = realIsToday || forcePreview
   const [remaining, setRemaining] = useState(() => getRemaining(target))
   const [celebrated, setCelebrated] = useState(false)
 
@@ -52,52 +57,51 @@ export default function BirthdayReveal() {
   }, [isToday, celebrated])
 
   return (
-    <section className="section-shell relative flex min-h-[80vh] items-center justify-center bg-ink-950 text-center">
-      <StarField count={60} />
-      <div className="relative z-10 mx-auto max-w-xl px-4">
-        {isToday ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-          >
-            <div className="mx-auto mb-6 h-24 w-24 rounded-full bg-gold-300/10 shadow-glow" />
-            <h2 className="mb-6 font-display text-4xl font-medium text-gold-200 md:text-5xl">
-              Happy Birthday, {names.her}
-            </h2>
-            <p className="font-display italic leading-relaxed text-mist/70">
-              Today isn&rsquo;t just another date.
-              <br />
-              It&rsquo;s the day someone incredibly special was born.
-            </p>
-          </motion.div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.8 }}
-          >
-            <p className="mb-4 font-display italic text-mist/50">Something special is waiting...</p>
-            <h2 className="mb-10 font-display text-2xl font-medium text-mist md:text-3xl">2 October</h2>
-            <div className="grid grid-cols-4 gap-3 sm:gap-5">
-              {[
-                ['days', 'Days'],
-                ['hours', 'Hours'],
-                ['minutes', 'Minutes'],
-                ['seconds', 'Seconds'],
-              ].map(([key, label]) => (
-                <div key={key} className="rounded-xl border border-gold-300/15 bg-ink-800/40 py-5">
-                  <p className="font-display text-2xl text-gold-200 sm:text-3xl">
-                    {String(remaining[key]).padStart(2, '0')}
-                  </p>
-                  <p className="mt-1 font-body text-[10px] tracking-wideish text-mist/40">{label}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </div>
-    </section>
+    <div className="relative mx-auto max-w-xl px-4 text-center">
+      {isToday ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+        >
+          <div className="mx-auto mb-6 h-24 w-24 rounded-full bg-gold-300/10 shadow-glow" />
+          <h2 className="mb-3 font-display text-3xl font-medium tracking-wide text-gold-200 md:text-4xl">
+            HAPPY BIRTHDAY
+          </h2>
+          <h3 className="mb-6 font-display text-2xl text-rose-300 md:text-3xl">{names.her.toUpperCase()}</h3>
+          <div className="space-y-2 font-display italic leading-relaxed text-mist/70">
+            {birthdayRevealMessage.map((line, i) => (
+              <p key={i}>{line}</p>
+            ))}
+          </div>
+          <p className="mt-6 font-display text-xl tracking-wideish text-gold-200">02 • 10</p>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.8 }}
+        >
+          <p className="mb-4 font-display italic text-mist/50">Something special is waiting...</p>
+          <h2 className="mb-10 font-display text-2xl font-medium text-mist md:text-3xl">2 October</h2>
+          <div className="grid grid-cols-4 gap-3 sm:gap-5">
+            {[
+              ['days', 'Days'],
+              ['hours', 'Hours'],
+              ['minutes', 'Minutes'],
+              ['seconds', 'Seconds'],
+            ].map(([key, label]) => (
+              <div key={key} className="rounded-xl border border-gold-300/15 bg-ink-800/40 py-5">
+                <p className="font-display text-2xl text-gold-200 sm:text-3xl">
+                  {String(remaining[key]).padStart(2, '0')}
+                </p>
+                <p className="mt-1 font-body text-[10px] tracking-wideish text-mist/40">{label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </div>
   )
 }

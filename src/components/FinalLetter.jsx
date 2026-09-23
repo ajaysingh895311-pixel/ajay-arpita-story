@@ -1,9 +1,24 @@
 import { motion } from 'framer-motion'
-import { names } from '../data/config.js'
+import { names, birthdayNote } from '../data/config.js'
 
 export default function FinalLetter() {
   return (
     <section className="section-shell bg-ink-900">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: 0.8 }}
+        className="mx-auto mb-14 max-w-md text-center"
+      >
+        <p className="mb-2 font-body text-xs tracking-wideish text-rose-300/60">For {names.her}</p>
+        {birthdayNote.map((line, i) => (
+          <p key={i} className="font-display italic leading-relaxed text-mist/60">
+            {line}
+          </p>
+        ))}
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}

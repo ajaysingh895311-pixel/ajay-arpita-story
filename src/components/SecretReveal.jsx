@@ -3,9 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Lock, LockOpen } from 'lucide-react'
 import { names, secretAnswer, secretQuestion } from '../data/config.js'
 
+// Optional: put a favourite photo at public/images/final-photo.jpg
+// and it'll appear once the secret is unlocked.
+const FINAL_PHOTO = '/images/final-photo.jpg'
+
 export default function SecretReveal() {
   const [stage, setStage] = useState('closed') // closed | asking | wrong | unlocked
   const [value, setValue] = useState('')
+  const [photoOk, setPhotoOk] = useState(true)
 
   const submit = (e) => {
     e.preventDefault()
@@ -87,6 +92,15 @@ export default function SecretReveal() {
               </h3>
               <p className="font-display italic text-mist/60">Our story started on 16.06.2019</p>
               <p className="font-display italic text-mist/60">And every chapter matters.</p>
+
+              {photoOk && (
+                <img
+                  src={FINAL_PHOTO}
+                  alt=""
+                  onError={() => setPhotoOk(false)}
+                  className="mx-auto mt-6 max-w-[220px] rounded-2xl shadow-card"
+                />
+              )}
             </motion.div>
           )}
         </AnimatePresence>

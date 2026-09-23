@@ -15,7 +15,7 @@ export default function LoveLetters() {
   }
 
   return (
-    <section className="section-shell bg-ink-950">
+    <section data-section="letters" className="section-shell bg-ink-950">
       <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
