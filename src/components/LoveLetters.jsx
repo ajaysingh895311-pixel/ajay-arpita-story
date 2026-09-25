@@ -24,7 +24,7 @@ export default function LoveLetters() {
           transition={{ duration: 0.7 }}
           className="mb-14 text-center"
         >
-          <h2 className="font-display text-3xl font-medium text-mist md:text-4xl">Things I Don&rsquo;t Say Enough</h2>
+          <h2 className="font-display text-3xl font-medium text-mist md:text-4xl">Things I Don&rsquo;t Say Enough ❤️</h2>
         </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2">
@@ -67,7 +67,11 @@ export default function LoveLetters() {
                       transition={{ duration: 0.4, ease: 'easeInOut' }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-6 font-display italic leading-relaxed text-mist/70">{letter.message}</p>
+                      <div className="space-y-3 px-5 pb-6 font-display italic leading-relaxed text-mist/70">
+                        {letter.message.split('\n\n').map((para, k) => (
+                          <p key={k}>{para}</p>
+                        ))}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
