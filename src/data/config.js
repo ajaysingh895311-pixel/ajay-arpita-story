@@ -51,8 +51,8 @@ export const birthdayRevealMessage = [
 
 // A short personal note shown just above the final letter.
 export const birthdayNote = [
-  'Har saal tera birthday aata rahe, aur meri har dua mein tera naam shaamil rahe.',
-  '16 June 2019 se lekar aaj tak, har memory ne humari kahani ko thoda aur khoobsurat banaya hai.',
+  'May your birthday keep coming back every year, and may my every prayer carry your name in it.',
+  'From 16 June 2019 to today, every memory has made our story a little more beautiful.',
 ]
 
 // ── Long distance chapter ──
