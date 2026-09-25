@@ -36,7 +36,9 @@ export default function Timeline() {
 
                   <div className={alignLeft ? 'md:order-1 md:text-right' : 'md:order-2 md:text-left'}>
                     <div className={`inline-block ${alignLeft ? 'md:mr-8' : 'md:ml-8'}`}>
-                      <p className="mb-1 font-body text-xs tracking-wideish text-gold-300/70">{m.date}</p>
+                      {m.date && (
+                        <p className="mb-1 font-body text-xs tracking-wideish text-gold-300/70">{m.date}</p>
+                      )}
                       <h3 className="mb-2 font-display text-xl text-mist">{m.title}</h3>
                       <p className="max-w-xs font-body text-sm leading-relaxed text-mist/60">{m.description}</p>
                     </div>
