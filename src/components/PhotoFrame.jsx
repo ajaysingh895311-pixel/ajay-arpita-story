@@ -6,7 +6,17 @@ import { ImagePlus } from 'lucide-react'
  * site still looks intentional before a real photo is added, and
  * doesn't show a broken-image icon if the filename is wrong.
  */
-export default function PhotoFrame({ src, alt = '', label, className = '', aspect = 'aspect-[4/5]' }) {
+export default function PhotoFrame({
+  src,
+  alt = '',
+  label,
+  className = '',
+  aspect = 'aspect-[4/5]',
+  // Faces are usually in the upper half of a photo, so default to
+  // a top-weighted crop instead of dead-center. Pass e.g. "object-center"
+  // or "object-[50%_20%]" per-photo if a specific one needs adjusting.
+  focus = 'object-top',
+}) {
   const [failed, setFailed] = useState(false)
 
   if (src && !failed) {
@@ -15,7 +25,7 @@ export default function PhotoFrame({ src, alt = '', label, className = '', aspec
         <img
           src={src}
           alt={alt}
-          className="h-full w-full object-cover"
+          className={`h-full w-full object-cover ${focus}`}
           loading="lazy"
           onError={() => setFailed(true)}
         />
