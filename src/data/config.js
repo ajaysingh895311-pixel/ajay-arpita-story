@@ -80,7 +80,8 @@ export const firstMeeting = {
 // ── First kiss / a private memory — keep this tasteful and optional ──
 export const firstKiss = {
   title: "A Moment We'll Always Remember",
-  message: '[Write your personal memory here]',
+  message:
+    "Maybe it wasn't a grand moment. Maybe it was just one of those ordinary moments that somehow became special because it was you and me.\n\nI still love thinking about the times when we talked for hours without realizing how quickly the time was passing. The random conversations, the stupid jokes, the little things we shared, and those moments when neither of us really wanted to say \u201cgoodbye.\u201d\n\nI wish I could go back to those moments sometimes\u2014not to change anything, but just to live them one more time.\n\nBecause that's what I love about us. We didn't need a perfect place, a perfect day, or anything extraordinary. Your presence was enough to make an ordinary moment feel unforgettable.\n\nAnd years from now, when life has changed and we've grown older, I hope we'll look back at these moments, smile, and say:\n\n\u201cRemember when it was just you and me, and we had no idea how beautiful those days were?\u201d \u2764\ufe0f\n\nI think those are the memories I'll always keep closest to my heart.\n\nNot because they were perfect\u2026 but because they were ours. \ud83e\udd0d\u2764\ufe0f",
 }
 
 // ── The song that's "yours" ──
