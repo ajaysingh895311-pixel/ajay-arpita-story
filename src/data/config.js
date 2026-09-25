@@ -77,11 +77,11 @@ export const longDistance = {
   ],
 }
 
-// ── First meeting, in Lucknow ──
+// ── College memories ──
 export const firstMeeting = {
-  title: 'The Day Distance Lost',
-  city: 'Lucknow',
-  description: '[Write about the day we finally met in Lucknow]',
+  title: 'Our College Memories',
+  description:
+    "This may look like just a college picture, but to me, it holds a thousand little memories.\n\nSomewhere between ordinary college days, random conversations, silly laughs, and those little moments we shared, you became one of the most beautiful parts of my life. \u2764\ufe0f\n\nI never knew that a place I went to for my studies would also become the place where I would find someone who would mean so much to me.\n\nI have graduated now, and you are still continuing your journey there. Things are changing, chapters are turning, and college life is slowly becoming a memory for me.\n\nBut whenever I look at this picture, I don't just see a college building or a moment from the past.\n\nI see us.\n\nI see the days we shared, the smiles we exchanged, the little moments that made those days special, and a chapter of my life that I will always carry with me. \ud83e\udd79\u2764\ufe0f\n\nMaybe one day, we'll look back at this picture together and smile at how young we were and how we never realized that these simple days would become some of our favourite memories.\n\nI may have graduated from college, but I'll never graduate from the memories I made with you there. \u2764\ufe0f\n\nBecause some places become special not because of what they are\u2026\n\nbut because of who we found there. \ud83e\udd0d\u2764\ufe0f",
 }
 
 // ── First kiss / a private memory — keep this tasteful and optional ──
