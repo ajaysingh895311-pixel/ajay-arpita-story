@@ -29,7 +29,7 @@ export default function Beginning() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.15 }}
         >
-          <PhotoFrame src={PHOTO} label="[Add our first photo here]" className="shadow-card mx-auto max-w-sm" />
+          <PhotoFrame src={PHOTO} focus="35.7% 37.7%" label="[Add our first photo here]" className="shadow-card mx-auto max-w-sm" />
         </motion.div>
       </div>
     </section>

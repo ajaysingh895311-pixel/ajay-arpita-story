@@ -15,7 +15,7 @@ export default function FirstMeeting() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
         >
-          <PhotoFrame src={PHOTO} label="[Add our Lucknow photos here]" aspect="aspect-[4/5]" className="mx-auto max-w-sm shadow-card" />
+          <PhotoFrame src={PHOTO} focus="48.4% 36.6%" label="[Add our Lucknow photos here]" aspect="aspect-[4/5]" className="mx-auto max-w-sm shadow-card" />
         </motion.div>
 
         <motion.div

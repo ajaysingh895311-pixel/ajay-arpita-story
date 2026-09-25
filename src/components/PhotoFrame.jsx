@@ -12,10 +12,10 @@ export default function PhotoFrame({
   label,
   className = '',
   aspect = 'aspect-[4/5]',
-  // Faces are usually in the upper half of a photo, so default to
-  // a top-weighted crop instead of dead-center. Pass e.g. "object-center"
-  // or "object-[50%_20%]" per-photo if a specific one needs adjusting.
-  focus = 'object-top',
+  // CSS object-position value, e.g. "50% 30%". Each photo can pass its
+  // own — computed once from where the face(s) actually are — so faces
+  // don't get cropped out. Defaults to a top-weighted crop if unset.
+  focus = '50% 30%',
 }) {
   const [failed, setFailed] = useState(false)
 
@@ -25,7 +25,8 @@ export default function PhotoFrame({
         <img
           src={src}
           alt={alt}
-          className={`h-full w-full object-cover ${focus}`}
+          className="h-full w-full object-cover"
+          style={{ objectPosition: focus }}
           loading="lazy"
           onError={() => setFailed(true)}
         />

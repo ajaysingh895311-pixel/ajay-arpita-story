@@ -45,6 +45,7 @@ export default function Timeline() {
                   <div className={`mt-4 md:mt-0 ${alignLeft ? 'md:order-2' : 'md:order-1'}`}>
                     <PhotoFrame
                       src={m.image}
+                      focus={m.focus}
                       aspect="aspect-[16/10]"
                       label="[Add photo]"
                       className={`max-w-xs ${alignLeft ? 'md:mr-0 md:ml-8' : 'md:mr-8 md:ml-0'}`}

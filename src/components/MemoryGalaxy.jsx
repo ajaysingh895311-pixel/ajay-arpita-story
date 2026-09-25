@@ -67,7 +67,7 @@ export default function MemoryGalaxy() {
                 style={{ left: `${p.left}%`, top: `${p.top}%`, width: p.size }}
               >
                 <div className="rounded-full shadow-glow">
-                  <PhotoFrame src={item.image} label="" aspect="aspect-square" className="rounded-full" />
+                  <PhotoFrame src={item.image} focus={item.focus} label="" aspect="aspect-square" className="rounded-full" />
                 </div>
                 <p className="mt-2 font-body text-[10px] tracking-wide text-mist/50">{item.title}</p>
               </motion.button>
@@ -93,7 +93,7 @@ export default function MemoryGalaxy() {
               className="w-full max-w-md"
               onClick={(e) => e.stopPropagation()}
             >
-              <PhotoFrame src={active.image} label="[Add photo]" aspect="aspect-square" />
+              <PhotoFrame src={active.image} focus={active.focus} label="[Add photo]" aspect="aspect-square" />
               <p className="mt-4 text-center font-display text-lg text-mist">{active.title}</p>
             </motion.div>
             <button
