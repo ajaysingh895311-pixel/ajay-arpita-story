@@ -55,6 +55,13 @@ export const birthdayNote = [
   'From 16 June 2019 to today, every memory has made our story a little more beautiful.',
 ]
 
+// ── "Where It All Began" ──
+export const beginningStory = {
+  title: 'Where It All Began',
+  message:
+    "The day our story began, I had no idea that one ordinary moment would become the beginning of something so special.\n\nAt that time, I didn't know how important you would become to me. I didn't know that a simple conversation, a simple meeting, or that first little moment would eventually give me so many reasons to smile.\n\nLooking back now, it feels like the universe quietly brought you into my life without telling me how much you would mean to me someday. \u2764\ufe0f\n\nI may not remember every little detail of that first moment perfectly, but I'll always remember how everything started.\n\nBecause that ordinary day gave me something I never knew I was looking for\u2014\n\nYou. \ud83e\udd0d\u2764\ufe0f\n\nAnd if I could go back to that very first moment, I wouldn't change a single thing.\n\nI'd just smile and think,\n\n\u201cThis is where our story begins.\u201d \u267e\ufe0f",
+}
+
 // ── Long distance chapter ──
 export const longDistance = {
   title: 'More Than 4 Years Apart, Never Apart at Heart',
