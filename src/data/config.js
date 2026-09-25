@@ -60,7 +60,14 @@ export const longDistance = {
   title: 'More Than 4 Years Apart, Never Apart at Heart',
   intro:
     'Distance was one of the biggest chapters of our story — and instead of pulling us apart, it just proved how strong we already were.',
-  stages: ['Distance', 'Waiting', 'Calls', 'Messages', 'Hope', 'Meeting Again ❤️'],
+  stages: [
+    { label: 'Distance', caption: 'Miles apart, hearts still close ❤️' },
+    { label: 'Waiting', caption: 'Every second feels incomplete without you 🥺' },
+    { label: 'Calls', caption: 'Your voice is my favourite part of the day 📞❤️' },
+    { label: 'Messages', caption: 'Little texts that keep us close 💌' },
+    { label: 'Hope', caption: 'One day, no distance… just you and me, together forever 🫶♾️' },
+    { label: 'Meeting Again ❤️', caption: '' },
+  ],
 }
 
 // ── First meeting, in Lucknow ──
