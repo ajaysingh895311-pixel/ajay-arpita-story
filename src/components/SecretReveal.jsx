@@ -1,106 +1,216 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Lock, LockOpen } from 'lucide-react'
-import { names, secretAnswer, secretQuestion } from '../data/config.js'
+import { useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { names, storyStartDate } from '../data/config.js'
+import { galleryItems } from '../data/gallery.js'
+import { useMusic } from '../context/MusicContext.jsx'
+import StarField from './StarField.jsx'
 
-// Optional: put a favourite photo at public/images/final-photo.jpg
-// and it'll appear once the secret is unlocked.
-const FINAL_PHOTO = '/images/final-photo.jpg'
+// Reuses the photo already marked as the couple's favourite in the
+// gallery data (src/data/gallery.js) — no new asset needed.
+const heroPhoto = galleryItems.find((g) => g.title === 'Our Favorite Photo') || galleryItems[0]
+
+const storyStartLabel = new Date(storyStartDate).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+})
+
+// Each step's on-screen time before the next one appears (ms).
+// Halved automatically for prefers-reduced-motion below.
+const STEP_DELAYS = [1600, 2200, 2200, 3200, 2400, 2200, 2600, 2200]
 
 export default function SecretReveal() {
-  const [stage, setStage] = useState('closed') // closed | asking | wrong | unlocked
-  const [value, setValue] = useState('')
-  const [photoOk, setPhotoOk] = useState(true)
+  const music = useMusic()
+  const musicRef = useRef(music)
+  musicRef.current = music
+  const reduceMotion = useReducedMotion()
 
-  const submit = (e) => {
-    e.preventDefault()
-    if (value.replace(/\D/g, '') === secretAnswer) {
-      setStage('unlocked')
+  const [opened, setOpened] = useState(false)
+  const [step, setStep] = useState(0) // 0 = nothing yet, advances through the reveal
+  const wasPlayingRef = useRef(false)
+  const timersRef = useRef([])
+
+  const clearTimers = () => {
+    timersRef.current.forEach(clearTimeout)
+    timersRef.current = []
+  }
+
+  useEffect(() => clearTimers, [])
+
+  const open = () => {
+    if (opened) return // guards against double clicks / repeat triggers
+    setOpened(true)
+
+    const wasPlaying = !!musicRef.current?.playing
+    wasPlayingRef.current = wasPlaying
+    if (wasPlaying) {
+      musicRef.current?.duck()
     } else {
-      setStage('wrong')
-      setTimeout(() => setStage('asking'), 700)
+      musicRef.current?.play() // the click itself is the user gesture browsers require
     }
+
+    const delays = STEP_DELAYS.map((d) => (reduceMotion ? Math.min(d, 500) : d))
+    let elapsed = 0
+    delays.forEach((delay, i) => {
+      elapsed += delay
+      timersRef.current.push(
+        setTimeout(() => {
+          setStep(i + 1)
+          // Restore the music once we reach the closing birthday message.
+          if (i + 1 === 7 && wasPlayingRef.current) musicRef.current?.unduck()
+        }, elapsed),
+      )
+    })
+  }
+
+  const fadeUp = {
+    initial: { opacity: 0, y: reduceMotion ? 0 : 14 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0 },
+    transition: { duration: reduceMotion ? 0.3 : 1, ease: 'easeOut' },
   }
 
   return (
-    <section className="section-shell flex min-h-[70vh] items-center justify-center bg-ink-950 text-center">
-      <div className="mx-auto max-w-sm px-4">
+    <section
+      data-section="surprise"
+      className="section-shell relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-ink-950 text-center"
+    >
+      <StarField count={opened ? 70 : 40} />
+
+      {/* World gently darkens once the surprise is opened */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 bg-ink-950"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: opened ? 0.55 : 0 }}
+        transition={{ duration: reduceMotion ? 0.3 : 1.3, ease: 'easeInOut' }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-md px-4">
         <AnimatePresence mode="wait">
-          {stage === 'closed' && (
-            <motion.button
-              key="closed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setStage('asking')}
-              className="group flex flex-col items-center gap-4"
-            >
-              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold-300/25 text-gold-300 transition-colors group-hover:border-gold-300/60">
-                <Lock size={20} />
-              </span>
-              <span className="font-display text-lg italic text-mist/60">One Last Secret</span>
-            </motion.button>
-          )}
-
-          {(stage === 'asking' || stage === 'wrong') && (
-            <motion.form
-              key="asking"
-              onSubmit={submit}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                x: stage === 'wrong' ? [0, -8, 8, -6, 6, 0] : 0,
-              }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: stage === 'wrong' ? 0.45 : 0.6 }}
-              className="flex flex-col items-center gap-5"
-            >
-              <p className="font-display text-lg text-mist">{secretQuestion}</p>
-              <input
-                type="text"
-                inputMode="numeric"
-                autoFocus
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                placeholder="DDMMYYYY"
-                className="w-48 rounded-full border border-gold-300/25 bg-ink-800/60 px-5 py-2.5 text-center font-body text-sm tracking-wideish text-mist placeholder:text-mist/30 focus:border-gold-300/60 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="rounded-full border border-gold-300/40 px-6 py-2 font-body text-xs tracking-wideish text-gold-200 transition-colors hover:border-gold-300/80"
+          {!opened && (
+            <motion.div key="closed" {...fadeUp} className="flex flex-col items-center gap-5">
+              <h3 className="font-display text-2xl text-mist md:text-3xl">Before You Go&hellip; ❤️</h3>
+              <p className="font-display italic text-mist/50">I saved one little thing just for you.</p>
+              <motion.button
+                onClick={open}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="mt-2 rounded-full border border-gold-300/40 px-7 py-3 font-body text-sm tracking-wideish text-gold-200 shadow-glow transition-colors hover:border-gold-300/80"
               >
-                Unlock
-              </button>
-              {stage === 'wrong' && <p className="font-body text-xs text-rose-400/80">Not quite — try again.</p>}
-            </motion.form>
+                Open It →
+              </motion.button>
+            </motion.div>
           )}
 
-          {stage === 'unlocked' && (
-            <motion.div
-              key="unlocked"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, ease: 'easeOut' }}
-              className="flex flex-col items-center gap-5"
-            >
-              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold-300/50 text-gold-200 shadow-glow">
-                <LockOpen size={20} />
-              </span>
-              <h3 className="font-display text-2xl tracking-wide text-gold-200 md:text-3xl">
-                {names.him.toUpperCase()} <span className="text-rose-400">&hearts;</span> {names.her.toUpperCase()}
-              </h3>
-              <p className="font-display italic text-mist/60">Our story started on 16.06.2019</p>
-              <p className="font-display italic text-mist/60">And every chapter matters.</p>
+          {opened && (
+            <motion.div key="opened" className="flex min-h-[50vh] flex-col items-center justify-center gap-7">
+              <AnimatePresence mode="wait">
+                {step === 1 && (
+                  <motion.p key="s1" {...fadeUp} className="font-display text-2xl text-mist md:text-3xl">
+                    {names.her}&hellip;
+                  </motion.p>
+                )}
 
-              {photoOk && (
-                <img
-                  src={FINAL_PHOTO}
-                  alt=""
-                  onError={() => setPhotoOk(false)}
-                  className="mx-auto mt-6 max-w-[220px] rounded-2xl shadow-card"
-                />
-              )}
+                {step === 2 && (
+                  <motion.p
+                    key="s2"
+                    {...fadeUp}
+                    className="max-w-sm font-display text-xl italic leading-relaxed text-mist/80"
+                  >
+                    If I could keep one thing from all these years&hellip;
+                  </motion.p>
+                )}
+
+                {step === 3 && (
+                  <motion.p key="s3" {...fadeUp} className="font-display text-xl italic text-mist/80">
+                    I&rsquo;d keep the little moments.
+                  </motion.p>
+                )}
+
+                {step === 4 && (
+                  <motion.div key="s4" className="flex flex-col items-center gap-4">
+                    <motion.div
+                      initial={{ opacity: 0, scale: reduceMotion ? 1 : 1.02, filter: reduceMotion ? 'blur(0px)' : 'blur(10px)' }}
+                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                      transition={{ duration: reduceMotion ? 0.4 : 1.8, ease: 'easeOut' }}
+                      className="overflow-hidden rounded-2xl shadow-glow"
+                      style={{ boxShadow: '0 20px 60px -20px rgba(0,0,0,0.6)' }}
+                    >
+                      <img
+                        src={heroPhoto.image}
+                        alt=""
+                        className="h-72 w-56 object-cover sm:h-80 sm:w-64"
+                        style={{ objectPosition: heroPhoto.focus }}
+                      />
+                    </motion.div>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: reduceMotion ? 0.1 : 1, duration: 0.8 }}
+                      className="font-display italic text-sm text-mist/40"
+                    >
+                      Just us. Just a moment. And somehow, everything.
+                    </motion.p>
+                  </motion.div>
+                )}
+
+                {step === 5 && (
+                  <motion.p
+                    key="s5"
+                    {...fadeUp}
+                    className="max-w-sm font-display text-xl italic leading-relaxed text-mist/80"
+                  >
+                    My favorite part of the story isn&rsquo;t where it started&hellip;
+                  </motion.p>
+                )}
+
+                {step === 6 && (
+                  <motion.p
+                    key="s6"
+                    initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: reduceMotion ? 0.3 : 1.1, ease: 'easeOut' }}
+                    className="max-w-sm font-display text-2xl text-gold-200 shadow-glow md:text-3xl"
+                  >
+                    It&rsquo;s that you&rsquo;re still in it. ❤️
+                  </motion.p>
+                )}
+
+                {step >= 7 && (
+                  <motion.div
+                    key="s7"
+                    initial={{ opacity: 0, y: reduceMotion ? 0 : 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: reduceMotion ? 0.3 : 1.1, ease: 'easeOut' }}
+                    className="flex flex-col items-center gap-3"
+                  >
+                    <h3 className="font-display text-2xl text-gold-200 md:text-3xl">
+                      Happy Birthday, {names.her} ❤️
+                    </h3>
+                    <p className="font-display italic text-mist/60">
+                      And here&rsquo;s to everything that&rsquo;s still waiting to become a memory.
+                    </p>
+                    <p className="font-body text-xs tracking-wideish text-mist/40">
+                      {storyStartLabel} → and still counting&hellip;
+                    </p>
+
+                    <AnimatePresence>
+                      {step >= 8 && (
+                        <motion.p
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.3, duration: reduceMotion ? 0.3 : 1.2 }}
+                          className="mt-6 max-w-xs font-display italic text-xs leading-relaxed text-mist/30"
+                        >
+                          Our story doesn&rsquo;t end here.
+                          <br />
+                          This is just another beautiful chapter. ♾️
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
