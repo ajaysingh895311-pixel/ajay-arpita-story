@@ -16,14 +16,14 @@ export const memories = [
   {
     date: '16 June 2019',
     title: 'The Beginning',
-    description: '[Add our story here — how it started.]',
+    description: '',
     image: '/images/beginning.jpg',
     focus: '35.7% 37.7%',
   },
   {
     date: '',
     title: 'First Memory',
-    description: '[Add our first memory here]',
+    description: '',
     image: '/images/memory-first-memory.jpg',
     focus: '32.3% 49.5%',
   },
