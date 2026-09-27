@@ -36,26 +36,26 @@ export default function TimeTogether() {
   }, [])
 
   return (
-    <section className="section-shell bg-ink-950">
+    <section data-section="time-together" className="section-shell bg-ink-950">
       <div className="mx-auto max-w-2xl text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.7 }}
-          className="mb-3 font-body text-sm tracking-wideish text-rose-300/70"
-        >
-          Since 16 June 2019
-        </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.7, delay: 0.05 }}
-          className="mb-12 font-display text-3xl font-medium text-mist md:text-4xl"
+          transition={{ duration: 0.7 }}
+          className="mb-3 font-display text-3xl font-medium text-mist md:text-4xl"
         >
-          Our Time Together
+          Since 16 June 2019 ❤️
         </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.7, delay: 0.05 }}
+          className="mb-12 font-display italic text-mist/50"
+        >
+          And somehow, the story is still being written.
+        </motion.p>
 
         <div className="mb-12 grid grid-cols-3 gap-4 sm:gap-8">
           {units.map((u, i) => (
@@ -73,17 +73,15 @@ export default function TimeTogether() {
           ))}
         </div>
 
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="space-y-1 font-display italic text-mist/50"
+          className="font-display italic text-mist/40"
         >
-          <p>7+ years</p>
-          <p>Countless memories</p>
-          <p>One beautiful story</p>
-        </motion.div>
+          So many days. So many memories. One beautiful story.
+        </motion.p>
       </div>
     </section>
   )

@@ -71,16 +71,58 @@ export const firstKiss = {
     "Maybe it wasn't a grand moment. Maybe it was just one of those ordinary moments that somehow became special because it was you and me.\n\nI still love thinking about the times when we talked for hours without realizing how quickly the time was passing. The random conversations, the stupid jokes, the little things we shared, and those moments when neither of us really wanted to say \u201cgoodbye.\u201d\n\nI wish I could go back to those moments sometimes\u2014not to change anything, but just to live them one more time.\n\nBecause that's what I love about us. We didn't need a perfect place, a perfect day, or anything extraordinary. Your presence was enough to make an ordinary moment feel unforgettable.\n\nAnd years from now, when life has changed and we've grown older, I hope we'll look back at these moments, smile, and say:\n\n\u201cRemember when it was just you and me, and we had no idea how beautiful those days were?\u201d \u2764\ufe0f\n\nI think those are the memories I'll always keep closest to my heart.\n\nNot because they were perfect\u2026 but because they were ours. \ud83e\udd0d\u2764\ufe0f",
 }
 
-// ── Cinematic photo story: childhood, a few solo portraits, birthday cake ──
+// ── Cinematic photo story: childhood, solo portraits, birthday cake ──
 export const photoStory = {
   childhoodIntro: 'Before all the memories\u2026',
-  childhoodCaption: 'This is where her story began \u2014 long before mine ever crossed it.',
-  soloLines: [
-    'Somehow, you became my favourite part of ordinary days.',
-    'Some moments become memories without asking.',
-    'And then there was us.',
+  childhoodCaption: 'Before all the memories, there was you \u2014 becoming the person I would one day love.',
+  solos: [
+    { src: '/images/arpita-solo-01.jpg', focus: '61% 24%', caption: 'Somehow, your smile still makes ordinary moments feel special.' },
+    { src: '/images/arpita-solo-02.jpg', focus: '45% 24%', caption: 'There are pictures you look at once\u2026 and pictures you never really get tired of.' },
+    { src: '/images/arpita-solo-03.jpg', focus: '31% 27%', caption: 'Some moments become memories without asking.' },
+    { src: '/images/arpita-solo-04.jpg', focus: '45% 29%', caption: 'You have a way of making even the simplest moments feel beautiful.' },
+    { src: '/images/arpita-solo-05.jpg', focus: '59% 21%', caption: 'One of those little moments I would happily keep forever.' },
+    { src: '/images/arpita-solo-06.jpeg', focus: '48% 27%', caption: 'And then there was the girl who slowly became one of my favorite parts of life.' },
   ],
-  cakeCaption: 'One of those moments I never want to forget.',
+  cakeCaption: 'One more birthday memory worth keeping forever.',
+}
+
+// ── A dedicated personal letter, its own section after "Things I Don't Say Enough" ──
+export const personalLetter = {
+  title: 'A Letter I Never Want You To Forget',
+  subtitle: 'Some things are easier to write than to say.',
+  paragraphs: [
+    'Dear Arpita,',
+    "Sometimes I think about how one ordinary day, 16 June 2019, quietly became one of the most important days of my life.",
+    "I don't know if I say it enough, but having you in my life has made so many ordinary moments feel special.",
+    "Your smile, our random conversations, the silly moments, the little arguments, the laughs, the pictures, the college memories, and all those small moments that probably didn't seem important at the time \u2014 somehow, those are the memories I want to keep forever.",
+    "Over the years, I've seen different sides of you, and somehow, with every passing year, I've found another reason to love you a little more.",
+    'You became more than just someone I love.',
+    'You became someone whose presence became a beautiful part of my life.',
+    "There are so many things I don't always say properly.",
+    "Sometimes I don't have the right words.",
+    'Sometimes I just keep things in my heart.',
+    'But I hope you always know one thing:',
+    'You matter to me. A lot. \u2764\ufe0f',
+    'Thank you for all the little moments that became big memories.',
+    "Thank you for the smiles, the laughs, the silly things, the beautiful days, and even the moments that weren't perfect.",
+    'They are all part of our story.',
+    'And if I could go back to 16 June 2019 knowing everything I know today, I would still choose to meet you.',
+    'I would still choose to know you.',
+    'And I would still choose every little moment that brought us here.',
+    "I don't know exactly what the future will look like.",
+    'But I know I want there to be many more memories with you.',
+    'More birthdays.',
+    'More laughs.',
+    'More random pictures.',
+    'More silly conversations.',
+    'More ordinary days that somehow become our favorite memories.',
+    'And hopefully, many more chapters of us.',
+    'So on your birthday, I just want you to remember something simple:',
+    'No matter how much time passes, you will always be a very special part of my story. \u2764\ufe0f',
+    'Happy Birthday, Arpita.',
+    'I love you.',
+    '\u2014 Ajay',
+  ],
 }
 
 // ── Countdown teaser copy, shown above the birthday countdown ──

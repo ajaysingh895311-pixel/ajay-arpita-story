@@ -8,12 +8,13 @@ import FirstMeeting from './components/FirstMeeting.jsx'
 import FirstKiss from './components/FirstKiss.jsx'
 import Timeline from './components/Timeline.jsx'
 import MemoryGalaxy from './components/MemoryGalaxy.jsx'
+import TimeTogether from './components/TimeTogether.jsx'
 import PhotoStory from './components/PhotoStory.jsx'
 import LoveLetters from './components/LoveLetters.jsx'
+import PersonalLetter from './components/PersonalLetter.jsx'
 import Shayari from './components/Shayari.jsx'
 import OurSong from './components/OurSong.jsx'
 import HeartGame from './components/HeartGame.jsx'
-import TimeTogether from './components/TimeTogether.jsx'
 import BirthdayLock from './components/BirthdayLock.jsx'
 import FinalLetter from './components/FinalLetter.jsx'
 import SecretReveal from './components/SecretReveal.jsx'
@@ -41,12 +42,13 @@ function Site() {
           <FirstKiss />
           <Timeline />
           <MemoryGalaxy />
+          <TimeTogether />
           <PhotoStory />
           <LoveLetters />
+          <PersonalLetter />
           <Shayari />
           <OurSong />
           <HeartGame />
-          <TimeTogether />
           <BirthdayLock />
           <FinalLetter />
           <SecretReveal />

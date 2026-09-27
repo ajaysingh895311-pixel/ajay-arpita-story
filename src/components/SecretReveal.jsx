@@ -88,7 +88,7 @@ export default function SecretReveal() {
         <AnimatePresence mode="wait">
           {!opened && (
             <motion.div key="closed" {...fadeUp} className="flex flex-col items-center gap-5">
-              <h3 className="font-display text-2xl text-mist md:text-3xl">Before You Go&hellip; ❤️</h3>
+              <h3 className="font-display text-2xl text-mist md:text-3xl">One Last Surprise 💗</h3>
               <p className="font-display italic text-mist/50">I saved one little thing just for you.</p>
               <motion.button
                 onClick={open}
@@ -96,7 +96,7 @@ export default function SecretReveal() {
                 whileTap={{ scale: 0.97 }}
                 className="mt-2 rounded-full border border-gold-300/40 px-7 py-3 font-body text-sm tracking-wideish text-gold-200 shadow-glow transition-colors hover:border-gold-300/80"
               >
-                Open It →
+                Open My Surprise →
               </motion.button>
             </motion.div>
           )}
@@ -187,10 +187,10 @@ export default function SecretReveal() {
                       Happy Birthday, {names.her} ❤️
                     </h3>
                     <p className="font-display italic text-mist/60">
-                      And here&rsquo;s to everything that&rsquo;s still waiting to become a memory.
+                      Here&rsquo;s to all the memories we&rsquo;ve made, and all the ones still waiting for us.
                     </p>
                     <p className="font-body text-xs tracking-wideish text-mist/40">
-                      {storyStartLabel} → and still counting&hellip;
+                      {storyStartLabel} → and still counting&hellip; ♾️
                     </p>
 
                     <AnimatePresence>
@@ -203,7 +203,7 @@ export default function SecretReveal() {
                         >
                           Our story doesn&rsquo;t end here.
                           <br />
-                          This is just another beautiful chapter. ♾️
+                          This is just another beautiful chapter.
                         </motion.p>
                       )}
                     </AnimatePresence>
