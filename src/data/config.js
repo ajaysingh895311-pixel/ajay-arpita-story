@@ -101,7 +101,7 @@ export const ourSong = {
   intro: 'Before we begin...',
   subtitle: 'Press play and let our memories begin.',
   sectionTitle: 'This Song Reminds Me of Us',
-  reason: reason: `Some songs become special because of the memories attached to them.
+  reason: `Some songs become special because of the memories attached to them.
 
 For me, “I Like Me Better” will always remind me of you.
 
