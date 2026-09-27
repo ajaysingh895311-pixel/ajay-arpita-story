@@ -143,5 +143,26 @@ export const ourSong = {
   intro: 'Before we begin...',
   subtitle: 'Press play and let our memories begin.',
   sectionTitle: 'This Song Reminds Me of Us',
-  reason: '[Write why this song is special to us]',
+  reason: `Some songs become special because of the memories attached to them.
+
+For me, “I Like Me Better” will always remind me of you.
+
+Maybe because it carries the feeling of being with someone who makes you feel comfortable, happy, and completely yourself. And somehow, that feeling always makes me think of us.
+
+It reminds me of our random conversations, our silly moments, the laughs we shared, the little things that probably didn't seem important at the time — but became some of my favorite memories.
+
+Whenever this song plays, I don't just hear the music.
+
+I think of you.
+
+I think of us.
+
+And I think about how beautiful it feels to have someone who slowly becomes such an important part of your life.
+
+So if you ever hear this song someday and suddenly think of me…
+
+just know that I'll probably be thinking of you too. ❤️
+
+Some songs remind you of a moment.
+This one reminds me of you.`,
 }
