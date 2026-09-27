@@ -2,7 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import confetti from 'canvas-confetti'
 import StarField from './StarField.jsx'
-import { names, herBirthday, birthdayRevealMessage } from '../data/config.js'
+import { names, herBirthday, birthdayRevealMessage, countdownTeaser } from '../data/config.js'
+
+// One solo portrait for the countdown teaser — a cinematic vignette,
+// not part of the countdown logic itself.
+const COUNTDOWN_PHOTO = '/images/arpita-solo-05.jpg'
 
 function nextBirthday(mmdd) {
   const [month, day] = mmdd.split('-').map(Number)
@@ -83,7 +87,22 @@ export default function BirthdayReveal({ forcePreview = false }) {
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.8 }}
         >
-          <p className="mb-4 font-display italic text-mist/50">Something special is waiting...</p>
+          <div className="relative mx-auto mb-8 aspect-[4/5] max-w-[220px] overflow-hidden rounded-2xl shadow-card">
+            <motion.img
+              src={COUNTDOWN_PHOTO}
+              alt=""
+              initial={{ scale: 1.08, opacity: 0, filter: 'blur(8px)' }}
+              whileInView={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 2, ease: 'easeOut' }}
+              className="h-full w-full object-cover"
+              style={{ objectPosition: '59% 21%' }}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/60 via-transparent to-transparent" />
+          </div>
+
+          <p className="mb-2 font-display italic text-mist/50">{countdownTeaser.eyebrow}</p>
+          <p className="mx-auto mb-8 max-w-xs font-body text-sm text-mist/50">{countdownTeaser.line}</p>
           <h2 className="mb-10 font-display text-2xl font-medium text-mist md:text-3xl">2 October</h2>
           <div className="grid grid-cols-4 gap-3 sm:gap-5">
             {[
@@ -100,6 +119,7 @@ export default function BirthdayReveal({ forcePreview = false }) {
               </div>
             ))}
           </div>
+          <p className="mt-8 font-display italic text-xs text-mist/30">{countdownTeaser.footer}</p>
         </motion.div>
       )}
     </div>

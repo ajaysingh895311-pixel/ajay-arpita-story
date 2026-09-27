@@ -4,11 +4,11 @@ import SongGate from './components/SongGate.jsx'
 import Hero from './components/Hero.jsx'
 import Universe from './components/Universe.jsx'
 import Beginning from './components/Beginning.jsx'
-import LongDistance from './components/LongDistance.jsx'
 import FirstMeeting from './components/FirstMeeting.jsx'
 import FirstKiss from './components/FirstKiss.jsx'
 import Timeline from './components/Timeline.jsx'
 import MemoryGalaxy from './components/MemoryGalaxy.jsx'
+import PhotoStory from './components/PhotoStory.jsx'
 import LoveLetters from './components/LoveLetters.jsx'
 import Shayari from './components/Shayari.jsx'
 import OurSong from './components/OurSong.jsx'
@@ -37,11 +37,11 @@ function Site() {
         <div ref={storyRef}>
           <Universe />
           <Beginning />
-          <LongDistance />
           <FirstMeeting />
           <FirstKiss />
           <Timeline />
           <MemoryGalaxy />
+          <PhotoStory />
           <LoveLetters />
           <Shayari />
           <OurSong />

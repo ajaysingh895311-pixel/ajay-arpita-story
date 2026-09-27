@@ -16,11 +16,6 @@ export const storyStartDate = '2019-06-16T00:00:00'
 // Format: 'MM-DD' (no year — it repeats every year)
 export const herBirthday = '10-02'
 
-// Password for the secret section at the end.
-// Shown as digits of the story-start date: DDMMYYYY
-export const secretAnswer = '16062019'
-export const secretQuestion = 'When did our story begin?'
-
 // The three lines that appear one at a time in the opening.
 export const heroLines = ['Some stories are planned.', 'Some just happen.', 'Ours began on...']
 export const heroTagline = 'A story worth remembering.'
@@ -62,21 +57,6 @@ export const beginningStory = {
     "The day our story began, I had no idea that one ordinary moment would become the beginning of something so special.\n\nAt that time, I didn't know how important you would become to me. I didn't know that a simple conversation, a simple meeting, or that first little moment would eventually give me so many reasons to smile.\n\nLooking back now, it feels like the universe quietly brought you into my life without telling me how much you would mean to me someday. \u2764\ufe0f\n\nI may not remember every little detail of that first moment perfectly, but I'll always remember how everything started.\n\nBecause that ordinary day gave me something I never knew I was looking for\u2014\n\nYou. \ud83e\udd0d\u2764\ufe0f\n\nAnd if I could go back to that very first moment, I wouldn't change a single thing.\n\nI'd just smile and think,\n\n\u201cThis is where our story begins.\u201d \u267e\ufe0f",
 }
 
-// ── Long distance chapter ──
-export const longDistance = {
-  title: 'More Than 4 Years Apart, Never Apart at Heart',
-  intro:
-    'Distance was one of the biggest chapters of our story — and instead of pulling us apart, it just proved how strong we already were.',
-  stages: [
-    { label: 'Distance', caption: 'Miles apart, hearts still close ❤️' },
-    { label: 'Waiting', caption: 'Every second feels incomplete without you 🥺' },
-    { label: 'Calls', caption: 'Your voice is my favourite part of the day 📞❤️' },
-    { label: 'Messages', caption: 'Little texts that keep us close 💌' },
-    { label: 'Hope', caption: 'One day, no distance… just you and me, together forever 🫶♾️' },
-    { label: 'Meeting Again ❤️', caption: '' },
-  ],
-}
-
 // ── College memories ──
 export const firstMeeting = {
   title: 'Our College Memories',
@@ -89,6 +69,31 @@ export const firstKiss = {
   title: "A Moment We'll Always Remember",
   message:
     "Maybe it wasn't a grand moment. Maybe it was just one of those ordinary moments that somehow became special because it was you and me.\n\nI still love thinking about the times when we talked for hours without realizing how quickly the time was passing. The random conversations, the stupid jokes, the little things we shared, and those moments when neither of us really wanted to say \u201cgoodbye.\u201d\n\nI wish I could go back to those moments sometimes\u2014not to change anything, but just to live them one more time.\n\nBecause that's what I love about us. We didn't need a perfect place, a perfect day, or anything extraordinary. Your presence was enough to make an ordinary moment feel unforgettable.\n\nAnd years from now, when life has changed and we've grown older, I hope we'll look back at these moments, smile, and say:\n\n\u201cRemember when it was just you and me, and we had no idea how beautiful those days were?\u201d \u2764\ufe0f\n\nI think those are the memories I'll always keep closest to my heart.\n\nNot because they were perfect\u2026 but because they were ours. \ud83e\udd0d\u2764\ufe0f",
+}
+
+// ── Cinematic photo story: childhood, a few solo portraits, birthday cake ──
+export const photoStory = {
+  childhoodIntro: 'Before all the memories\u2026',
+  childhoodCaption: 'This is where her story began \u2014 long before mine ever crossed it.',
+  soloLines: [
+    'Somehow, you became my favourite part of ordinary days.',
+    'Some moments become memories without asking.',
+    'And then there was us.',
+  ],
+  cakeCaption: 'One of those moments I never want to forget.',
+}
+
+// ── Countdown teaser copy, shown above the birthday countdown ──
+export const countdownTeaser = {
+  eyebrow: 'Your day is getting closer\u2026 \u2728',
+  line: "And I've been waiting to show you something I made just for you.",
+  footer: 'Something beautiful is waiting for you\u2026',
+}
+
+// ── Song credits (textual only \u2014 the actual audio file lives in public/music/) ──
+export const songCredits = {
+  background: 'Until I Found You \u2014 Stephen Sanchez',
+  reminder: 'I Like Me Better \u2014 Lauv',
 }
 
 // ── The song that's "yours" ──

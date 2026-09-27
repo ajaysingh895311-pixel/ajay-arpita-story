@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Play, Pause } from 'lucide-react'
 import { useMusic } from '../context/MusicContext.jsx'
-import { ourSong } from '../data/config.js'
+import { ourSong, songCredits } from '../data/config.js'
 
 export default function OurSong() {
   const music = useMusic()
@@ -18,6 +18,16 @@ export default function OurSong() {
         >
           {ourSong.sectionTitle}
         </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.7, delay: 0.05 }}
+          className="mb-4 font-body text-[11px] tracking-wide text-mist/30"
+        >
+          {songCredits.reminder}
+        </motion.p>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}

@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { names, storyStartDate } from '../data/config.js'
-import { galleryItems } from '../data/gallery.js'
 import { useMusic } from '../context/MusicContext.jsx'
 import StarField from './StarField.jsx'
 
-// Reuses the photo already marked as the couple's favourite in the
-// gallery data (src/data/gallery.js) — no new asset needed.
-const heroPhoto = galleryItems.find((g) => g.title === 'Our Favorite Photo') || galleryItems[0]
+// The most intimate existing couple photo in the project — used as
+// the final cinematic reveal image. No new asset needed.
+const heroPhoto = { image: '/images/final-photo.jpg', focus: '50% 32%' }
 
 const storyStartLabel = new Date(storyStartDate).toLocaleDateString('en-GB', {
   day: 'numeric',

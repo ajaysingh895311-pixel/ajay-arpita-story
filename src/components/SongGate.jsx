@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Play } from 'lucide-react'
 import { useMusic } from '../context/MusicContext.jsx'
-import { ourSong } from '../data/config.js'
+import { ourSong, songCredits } from '../data/config.js'
 
 /**
  * Shown once, before anything else. Pressing play both starts the
@@ -30,6 +30,7 @@ export default function SongGate({ onDone }) {
         >
           <p className="font-display italic text-mist/50">{ourSong.intro}</p>
           <p className="max-w-xs font-display text-lg text-mist">{ourSong.subtitle}</p>
+          <p className="font-body text-[11px] tracking-wide text-mist/30">{songCredits.background}</p>
 
           <motion.button
             onClick={() => start(true)}
