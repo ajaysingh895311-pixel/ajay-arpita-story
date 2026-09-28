@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MusicProvider } from './context/MusicContext.jsx'
 import SongGate from './components/SongGate.jsx'
 import Hero from './components/Hero.jsx'
@@ -19,6 +19,7 @@ import BirthdayLock from './components/BirthdayLock.jsx'
 import FinalLetter from './components/FinalLetter.jsx'
 import SecretReveal from './components/SecretReveal.jsx'
 import MusicToggle from './components/MusicToggle.jsx'
+import CinematicBackground from './components/CinematicBackground.jsx'
 
 function Site() {
   const [gateOpen, setGateOpen] = useState(true)
@@ -26,6 +27,24 @@ function Site() {
   // she opens it from the unlocked birthday section.
   const [chapterOpen, setChapterOpen] = useState(false)
   const storyRef = useRef(null)
+  const [mood, setMood] = useState('opening')
+
+  // Whichever [data-mood] section crosses the middle of the screen sets
+  // the atmosphere. IntersectionObserver only — no scroll listeners.
+  useEffect(() => {
+    const els = document.querySelectorAll('[data-mood]')
+    if (!('IntersectionObserver' in window) || els.length === 0) return undefined
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setMood(e.target.dataset.mood)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [chapterOpen])
 
   const openChapter = () => {
     setChapterOpen(true)
@@ -42,7 +61,9 @@ function Site() {
     <>
       {gateOpen && <SongGate onDone={() => setGateOpen(false)} />}
 
-      <main className="relative bg-ink-950">
+      <CinematicBackground mood={mood} />
+
+      <main className="relative z-10">
         <Hero onBegin={scrollToStory} />
 
         <div ref={storyRef}>
@@ -68,7 +89,8 @@ function Site() {
           )}
         </div>
 
-        <footer className="border-t border-gold-300/10 bg-ink-950 py-10 text-center">
+        <footer className="bg-gradient-to-b from-transparent to-ink-950 px-4 pb-12 pt-20 text-center">
+          <p className="mb-4 font-body text-[11px] tracking-[0.35em] text-gold-300/25">16 &bull; 06 &bull; 2019 &rarr; &infin;</p>
           <p className="font-display italic text-xs text-mist/30">made with love, one line of code at a time</p>
         </footer>
 

@@ -37,7 +37,7 @@ export default function MemoryGalaxy() {
   const active = openIndex !== null ? galleryItems[openIndex] : null
 
   return (
-    <section data-section="memories" className="section-shell relative overflow-hidden bg-ink-900">
+    <section data-section="memories" data-mood="memories" className="section-shell relative overflow-hidden">
       <StarField count={50} />
       <div className="relative z-10 mx-auto max-w-4xl">
         <motion.div

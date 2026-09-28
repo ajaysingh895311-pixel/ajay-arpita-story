@@ -75,7 +75,7 @@ export default function HeartGame() {
   }
 
   return (
-    <section data-section="game" className="section-shell bg-ink-900">
+    <section data-section="game" data-mood="letter" className="section-shell">
       <div className="mx-auto max-w-2xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
@@ -174,6 +174,14 @@ export default function HeartGame() {
               className="font-display italic text-mist/60"
             >
               I was saving one for you.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 5.6, duration: 1.4 }}
+              className="pt-6 font-display text-sm text-gold-200/70"
+            >
+              Your day is getting closer&hellip; ✨
             </motion.p>
           </div>
         )}

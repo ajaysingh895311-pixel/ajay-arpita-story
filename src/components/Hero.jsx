@@ -4,10 +4,9 @@ import StarField from './StarField.jsx'
 import FloatingHearts from './FloatingHearts.jsx'
 import { names, heroLines, heroTagline, enterButtonLabel } from '../data/config.js'
 
-// Optional: export your "hero-title.jpg" from Canva (see the
-// Canva section of the README) and drop it in public/images/.
-// If the file isn't there, this just quietly does nothing.
-const HERO_BG = '/images/hero-title.jpg'
+// A tiny blurred derivative of an existing couple photo. It only
+// becomes visible near the end of the opening sequence.
+const HERO_BG = '/images/atmos/hero.jpg'
 
 export default function Hero({ onBegin }) {
   const [step, setStep] = useState(0)
@@ -24,14 +23,27 @@ export default function Hero({ onBegin }) {
   }, [])
 
   return (
-    <section className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-ink-950">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-25"
-        style={{ backgroundImage: `url(${HERO_BG})` }}
+    <section data-mood="opening" className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-ink-950">
+      {/* 1. almost complete darkness → 2. a very faint ambient light */}
+      <motion.div
         aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(34,36,63,0.7),transparent_62%)]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 3.5, ease: 'easeOut' }}
       />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,rgba(34,36,63,0.6),transparent_60%)]" />
-      <div className="absolute inset-0 bg-ink-950/40" />
+      {/* 7. a faint memory becomes visible once the title has appeared */}
+      <motion.img
+        aria-hidden="true"
+        src={HERO_BG}
+        alt=""
+        className="absolute inset-0 h-full w-full scale-110 object-cover"
+        style={{ filter: 'blur(28px)' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: step >= 4 ? 0.13 : 0 }}
+        transition={{ duration: 3, ease: 'easeInOut' }}
+      />
+      <div className="absolute inset-0 bg-ink-950/50" />
       <StarField count={90} />
       <FloatingHearts count={5} />
 

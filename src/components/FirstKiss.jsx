@@ -4,7 +4,7 @@ import { firstKiss } from '../data/config.js'
 
 export default function FirstKiss() {
   return (
-    <section className="section-shell bg-ink-900">
+    <section data-mood="letter" className="section-shell">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

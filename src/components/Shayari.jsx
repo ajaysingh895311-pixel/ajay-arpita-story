@@ -3,7 +3,7 @@ import { shayari } from '../data/shayari.js'
 
 export default function Shayari() {
   return (
-    <section className="section-shell bg-ink-950">
+    <section data-mood="letter" className="section-shell">
       <div className="mx-auto max-w-2xl">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}

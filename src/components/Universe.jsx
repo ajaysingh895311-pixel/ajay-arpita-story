@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import StarField from './StarField.jsx'
 import { universeDestinations } from '../data/config.js'
 
 /**
@@ -12,8 +11,7 @@ export default function Universe() {
   }
 
   return (
-    <section className="section-shell relative bg-ink-900 py-20">
-      <StarField count={40} />
+    <section data-mood="opening" className="section-shell relative py-20">
       <div className="relative z-10 mx-auto max-w-3xl text-center">
         <motion.p
           initial={{ opacity: 0, y: 12 }}

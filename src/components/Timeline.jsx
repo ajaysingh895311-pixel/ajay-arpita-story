@@ -4,7 +4,7 @@ import PhotoFrame from './PhotoFrame.jsx'
 
 export default function Timeline() {
   return (
-    <section className="section-shell bg-ink-950">
+    <section data-mood="memories" className="section-shell">
       <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

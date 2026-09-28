@@ -7,7 +7,7 @@ export default function OurSong() {
   const music = useMusic()
 
   return (
-    <section data-section="song" className="section-shell bg-ink-950">
+    <section data-section="song" data-mood="letter" className="section-shell">
       <div className="mx-auto max-w-lg text-center">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}

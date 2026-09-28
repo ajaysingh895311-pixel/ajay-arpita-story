@@ -7,7 +7,7 @@ const PHOTO = '/images/beginning.jpg'
 
 export default function Beginning() {
   return (
-    <section data-section="beginning" className="section-shell bg-ink-900">
+    <section data-section="beginning" data-mood="beginning" className="section-shell">
       <div className="mx-auto grid max-w-5xl items-start gap-12 md:grid-cols-2 md:gap-16">
         <motion.div
           initial={{ opacity: 0, x: -24 }}

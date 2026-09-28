@@ -43,7 +43,7 @@ const [solo01, solo02, solo03, solo04, solo05, solo06] = photoStory.solos
 
 export default function PhotoStory() {
   return (
-    <section data-section="photo-story" className="section-shell overflow-hidden bg-ink-950">
+    <section data-section="photo-story" data-mood="photoStory" className="section-shell overflow-hidden">
       {/* ── Childhood ── */}
       <div className="mx-auto mb-24 max-w-md text-center">
         <motion.p

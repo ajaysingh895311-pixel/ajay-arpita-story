@@ -50,6 +50,7 @@ export default function BirthdayLock({ onOpenChapter }) {
   return (
     <section
       data-section="birthday"
+      data-mood="birthday"
       className="section-shell film-grain relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-ink-950"
     >
       {/* Memory hidden behind the lock: blurred, dark, never the focus */}

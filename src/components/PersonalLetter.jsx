@@ -3,7 +3,7 @@ import { personalLetter } from '../data/config.js'
 
 export default function PersonalLetter() {
   return (
-    <section data-section="personal-letter" className="section-shell bg-ink-900">
+    <section data-section="personal-letter" data-mood="letter" className="section-shell">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

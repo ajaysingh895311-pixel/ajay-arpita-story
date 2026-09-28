@@ -7,7 +7,7 @@ const PHOTO = '/images/college.jpg'
 
 export default function FirstMeeting() {
   return (
-    <section className="section-shell bg-ink-950">
+    <section data-mood="college" className="section-shell">
       <div className="mx-auto grid max-w-4xl items-start gap-10 md:grid-cols-2 md:gap-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}

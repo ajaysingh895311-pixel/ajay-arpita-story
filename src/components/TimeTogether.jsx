@@ -36,7 +36,7 @@ export default function TimeTogether() {
   }, [])
 
   return (
-    <section data-section="time-together" className="section-shell bg-ink-950">
+    <section data-section="time-together" data-mood="memories" className="section-shell">
       <div className="mx-auto max-w-2xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
@@ -57,18 +57,18 @@ export default function TimeTogether() {
           And somehow, the story is still being written.
         </motion.p>
 
-        <div className="mb-12 grid grid-cols-3 gap-4 sm:gap-8">
+        <div className="mb-12 grid grid-cols-3 gap-2 sm:gap-8">
           {units.map((u, i) => (
             <motion.div
               key={u.key}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }}
-              className="rounded-2xl border border-gold-300/15 bg-ink-800/40 py-8"
+              transition={{ duration: 0.9, delay: 0.1 + i * 0.15 }}
+              className="border-t border-gold-300/20 pt-6"
             >
-              <p className="font-display text-4xl text-gold-200 md:text-5xl">{parts[u.key]}</p>
-              <p className="mt-2 font-body text-xs tracking-wideish text-mist/50">{u.label}</p>
+              <p className="font-display text-5xl tabular-nums text-gold-200 sm:text-7xl">{parts[u.key]}</p>
+              <p className="mt-3 font-body text-[10px] uppercase tracking-[0.25em] text-mist/45 sm:text-xs">{u.label}</p>
             </motion.div>
           ))}
         </div>

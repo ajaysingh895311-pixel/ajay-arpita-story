@@ -72,9 +72,11 @@ export default function SecretReveal() {
   return (
     <section
       data-section="surprise"
-      className="section-shell relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-ink-950 text-center"
+      data-mood="ending"
+      className="section-shell relative flex min-h-[80vh] items-center justify-center overflow-hidden text-center"
     >
-      <StarField count={opened ? 70 : 40} />
+      {/* stars only appear once the surprise is opened */}
+      {opened && <StarField count={40} />}
 
       {/* World gently darkens once the surprise is opened */}
       <motion.div
