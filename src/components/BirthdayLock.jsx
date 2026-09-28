@@ -12,7 +12,7 @@ import { getBirthdayState } from '../utils/birthday.js'
  * Set `previewEnabled` to false before sharing to remove both.
  * The real date check lives in src/utils/birthday.js and is independent.
  */
-const previewEnabled = false
+const previewEnabled = true
 
 // A memory hidden behind the lock: an existing photo, heavily blurred.
 const BACKDROP_PHOTO = '/images/arpita-solo-05.jpg'
