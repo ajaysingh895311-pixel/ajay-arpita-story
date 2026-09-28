@@ -1,38 +1,40 @@
-import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { Lock } from 'lucide-react'
-import StarField from './StarField.jsx'
+import { useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import BirthdayReveal from './BirthdayReveal.jsx'
-import { lockMessages, herBirthday } from '../data/config.js'
+import { herBirthday } from '../data/config.js'
 import { getBirthdayState } from '../utils/birthday.js'
 
 /**
- * Preview shortcuts, so Ajay can see the birthday state early:
- *   - open the site with ?preview=birthday, or
- *   - tap the small lock 5 times quickly.
- * Set `previewEnabled` to false before sharing if you want them gone.
+ * Preview shortcuts, so Ajay can see the unlocked state early:
+ *   - open the site with ?preview=birthday  (shows the reveal straight away)
+ *   - tap the small lock 5 times quickly    (plays the full "countdown hits
+ *     zero" transition)
+ * Set `previewEnabled` to false before sharing to remove both.
+ * The real date check lives in src/utils/birthday.js and is independent.
  */
 const previewEnabled = true
 
-function initialUnlocked() {
-  if (getBirthdayState(herBirthday).unlocked) return true
-  if (!previewEnabled || typeof window === 'undefined') return false
-  return new URLSearchParams(window.location.search).get('preview') === 'birthday'
+// A memory hidden behind the lock: an existing photo, heavily blurred.
+const BACKDROP_PHOTO = '/images/arpita-solo-05.jpg'
+
+function initialState() {
+  if (getBirthdayState(herBirthday).unlocked) return { unlocked: true, live: false }
+  if (previewEnabled && typeof window !== 'undefined') {
+    if (new URLSearchParams(window.location.search).get('preview') === 'birthday') {
+      return { unlocked: true, live: false }
+    }
+  }
+  return { unlocked: false, live: false }
 }
 
 export default function BirthdayLock({ onOpenChapter }) {
-  const [unlocked, setUnlocked] = useState(initialUnlocked)
+  const reduceMotion = useReducedMotion()
+  const [state, setState] = useState(initialState)
   const tapCount = useRef(0)
   const tapTimer = useRef(null)
 
-  // If she is on the page when the countdown reaches zero, unlock live.
-  useEffect(() => {
-    if (unlocked) return
-    const id = setInterval(() => {
-      if (getBirthdayState(herBirthday).unlocked) setUnlocked(true)
-    }, 1000)
-    return () => clearInterval(id)
-  }, [unlocked])
+  // Countdown reached zero while she was on the page → cinematic unlock.
+  const handleZero = () => setState({ unlocked: true, live: true })
 
   const handleLockTap = () => {
     if (!previewEnabled) return
@@ -40,37 +42,43 @@ export default function BirthdayLock({ onOpenChapter }) {
     clearTimeout(tapTimer.current)
     tapTimer.current = setTimeout(() => (tapCount.current = 0), 1500)
     if (tapCount.current >= 5) {
-      setUnlocked(true)
       tapCount.current = 0
+      handleZero()
     }
   }
 
   return (
-    <section data-section="birthday" className="section-shell relative flex min-h-[70vh] items-center justify-center bg-ink-950">
-      <StarField count={50} />
-      <div className="relative z-10 w-full">
-        <BirthdayReveal unlocked={unlocked} onOpenChapter={onOpenChapter} />
+    <section
+      data-section="birthday"
+      className="section-shell film-grain relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-ink-950"
+    >
+      {/* Memory hidden behind the lock: blurred, dark, never the focus */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <img
+          src={BACKDROP_PHOTO}
+          alt=""
+          loading="lazy"
+          className="h-full w-full scale-125 object-cover opacity-30"
+          style={{ filter: 'blur(28px)', objectPosition: '59% 25%' }}
+        />
+        <motion.div
+          className="absolute inset-0 bg-ink-950"
+          initial={{ opacity: 0.6 }}
+          animate={{ opacity: state.unlocked ? 0.88 : 0.6 }}
+          transition={{ duration: reduceMotion ? 0.2 : 1.8, ease: 'easeInOut' }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(228,201,143,0.10),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(7,7,13,0.9)_100%)]" />
+      </div>
 
-        {!unlocked && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="mx-auto mt-10 flex flex-col items-center gap-3 px-4 text-center"
-          >
-            <button
-              type="button"
-              onClick={handleLockTap}
-              aria-label="Locked chapter"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gold-300/25 text-gold-300"
-            >
-              <Lock size={15} />
-            </button>
-            <p className="font-display italic text-mist/60">{lockMessages.eyebrow}</p>
-            <p className="font-display text-sm text-mist/40">{lockMessages.line}</p>
-          </motion.div>
-        )}
+      <div className="relative z-10 w-full">
+        <BirthdayReveal
+          unlocked={state.unlocked}
+          live={state.live}
+          onZero={handleZero}
+          onLockTap={handleLockTap}
+          onOpenChapter={onOpenChapter}
+        />
       </div>
     </section>
   )

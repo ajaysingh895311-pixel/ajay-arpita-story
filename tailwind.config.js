@@ -41,6 +41,10 @@ export default {
           '50%': { transform: 'translateY(-18px) translateX(6px)' },
           '100%': { transform: 'translateY(0px) translateX(0px)' },
         },
+        softpulse: {
+          '0%, 100%': { opacity: 0.35 },
+          '50%': { opacity: 0.85 },
+        },
         twinkle: {
           '0%, 100%': { opacity: 0.25 },
           '50%': { opacity: 1 },
@@ -49,6 +53,7 @@ export default {
       animation: {
         drift: 'drift 7s ease-in-out infinite',
         twinkle: 'twinkle 3.5s ease-in-out infinite',
+        'soft-pulse': 'softpulse 4s ease-in-out infinite',
       },
     },
   },

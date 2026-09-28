@@ -32,14 +32,22 @@ export const universeDestinations = [
   { emoji: '🎂', label: 'Her Day', target: 'birthday' },
 ]
 
-// Shown on the birthday-lock card before the date arrives.
+// Shown at the bottom of the locked birthday state.
 export const lockMessages = {
-  eyebrow: 'Your birthday chapter is waiting.',
-  line: 'It opens on 2 October.',
+  eyebrow: 'Your birthday chapter is waiting\u2026',
+  line: 'It opens on 2 October. \u2764\ufe0f',
 }
 
-// The staged lines shown, one at a time, when the birthday unlocks.
-export const birthdayUnlockLines = ['Arpita…', 'Your day is here. ❤️']
+// The unlock sequence. `lineLive` is used when the countdown reaches
+// zero while she is watching; `lineHere` when she opens the site on
+// or after the day (or in preview mode).
+export const birthdayUnlock = {
+  greeting: 'Arpita\u2026',
+  lineLive: 'Your day is finally here. \u2764\ufe0f',
+  lineHere: 'Your day is here. \u2764\ufe0f',
+  wishOne: "I didn't want to give you just a birthday wish.",
+  wishTwo: 'I wanted to give you a little piece of our story.',
+}
 export const birthdayRevealMessage = [
   "Here's to all the memories we've made, and all the ones still waiting for us.",
 ]
@@ -125,12 +133,13 @@ export const personalLetter = {
   ],
 }
 
-// ── Countdown teaser copy, shown above the birthday countdown ──
+// ── Countdown copy, shown before her birthday ──
 export const countdownTeaser = {
-  dateLabel: '02 • OCTOBER',
-  heading: 'Your day is almost here. ❤️',
-  primary: 'From the day our story began\u2026 to the day I get to celebrate you.',
-  secondary: 'A little more time\u2026 ❤️',
+  dateLabel: '02 \u2022 OCTOBER',
+  heading: 'Your day is almost here. \u2764\ufe0f',
+  lineOne: 'From the day our story began\u2026',
+  lineTwo: 'to the day I get to celebrate you.',
+  secondary: 'A little more time\u2026 \u2764\ufe0f',
 }
 
 // ── Song credits (textual only \u2014 the actual audio file lives in public/music/) ──
