@@ -34,14 +34,14 @@ export const universeDestinations = [
 
 // Shown on the birthday-lock card before the date arrives.
 export const lockMessages = {
-  eyebrow: "There's one chapter left...",
-  line: 'It opens on October 2.',
+  eyebrow: 'Your birthday chapter is waiting.',
+  line: 'It opens on 2 October.',
 }
 
-// The two lines that appear during the birthday reveal itself.
+// The staged lines shown, one at a time, when the birthday unlocks.
+export const birthdayUnlockLines = ['Arpita…', 'Your day is here. ❤️']
 export const birthdayRevealMessage = [
-  'Today the world celebrates the day you were born.',
-  'I celebrate the day the world got someone who became so special to me.',
+  "Here's to all the memories we've made, and all the ones still waiting for us.",
 ]
 
 // A short personal note shown just above the final letter.
@@ -127,14 +127,14 @@ export const personalLetter = {
 
 // ── Countdown teaser copy, shown above the birthday countdown ──
 export const countdownTeaser = {
-  eyebrow: 'Your day is getting closer\u2026 \u2728',
-  line: "And I've been waiting to show you something I made just for you.",
-  footer: 'Something beautiful is waiting for you\u2026',
+  dateLabel: '02 • OCTOBER',
+  heading: 'Your day is almost here. ❤️',
+  primary: 'From the day our story began\u2026 to the day I get to celebrate you.',
+  secondary: 'A little more time\u2026 ❤️',
 }
 
 // ── Song credits (textual only \u2014 the actual audio file lives in public/music/) ──
 export const songCredits = {
-  background: 'Until I Found You \u2014 Stephen Sanchez',
   reminder: 'I Like Me Better \u2014 Lauv',
 }
 

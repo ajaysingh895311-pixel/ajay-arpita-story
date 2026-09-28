@@ -18,8 +18,10 @@ export default function Beginning() {
           <p className="mb-3 font-body text-sm tracking-wideish text-rose-300/70">16 June 2019</p>
           <h2 className="mb-6 font-display text-3xl font-medium text-mist md:text-4xl">{beginningStory.title} ❤️</h2>
           <div className="max-w-md space-y-4 font-display italic leading-relaxed text-mist/70">
-            {beginningStory.message.split('\n\n').map((para, i) => (
-              <p key={i}>{para}</p>
+            {beginningStory.message.split('\n\n').map((para, i, all) => (
+              <p key={i} className={i === all.length - 1 ? 'pt-2 text-xl text-gold-200' : ''}>
+                {para}
+              </p>
             ))}
           </div>
         </motion.div>

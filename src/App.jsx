@@ -22,7 +22,17 @@ import MusicToggle from './components/MusicToggle.jsx'
 
 function Site() {
   const [gateOpen, setGateOpen] = useState(true)
+  // The birthday chapter (letter + final surprise) stays closed until
+  // she opens it from the unlocked birthday section.
+  const [chapterOpen, setChapterOpen] = useState(false)
   const storyRef = useRef(null)
+
+  const openChapter = () => {
+    setChapterOpen(true)
+    setTimeout(() => {
+      document.querySelector('[data-section="final-letter"]')?.scrollIntoView({ behavior: 'smooth' })
+    }, 150)
+  }
 
   const scrollToStory = () => {
     storyRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -49,9 +59,13 @@ function Site() {
           <Shayari />
           <OurSong />
           <HeartGame />
-          <BirthdayLock />
-          <FinalLetter />
-          <SecretReveal />
+          <BirthdayLock onOpenChapter={openChapter} />
+          {chapterOpen && (
+            <>
+              <FinalLetter />
+              <SecretReveal />
+            </>
+          )}
         </div>
 
         <footer className="border-t border-gold-300/10 bg-ink-950 py-10 text-center">

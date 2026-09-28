@@ -3,7 +3,7 @@ import { names, birthdayNote } from '../data/config.js'
 
 export default function FinalLetter() {
   return (
-    <section className="section-shell bg-ink-900">
+    <section data-section="final-letter" className="section-shell bg-ink-900">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Heart } from 'lucide-react'
 import { useMusic } from '../context/MusicContext.jsx'
 
@@ -155,6 +155,28 @@ export default function HeartGame() {
             </motion.div>
           )}
         </div>
+
+        {/* A quiet bridge from the game into her birthday chapter */}
+        {phase === 'done' && (
+          <div className="mt-14 space-y-3">
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 1.2 }}
+              className="font-display text-lg text-mist/80"
+            >
+              And while you were busy catching hearts&hellip;
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 3.2, duration: 1.4 }}
+              className="font-display italic text-mist/60"
+            >
+              I was saving one for you.
+            </motion.p>
+          </div>
+        )}
       </div>
     </section>
   )

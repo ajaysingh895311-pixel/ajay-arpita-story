@@ -137,7 +137,7 @@ export default function SecretReveal() {
                     >
                       <img
                         src={heroPhoto.image}
-                        alt=""
+                        alt="Ajay and Arpita, close together"
                         className="h-72 w-56 object-cover sm:h-80 sm:w-64"
                         style={{ objectPosition: heroPhoto.focus }}
                       />
@@ -204,6 +204,19 @@ export default function SecretReveal() {
                           Our story doesn&rsquo;t end here.
                           <br />
                           This is just another beautiful chapter.
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+
+                    <AnimatePresence>
+                      {step >= 8 && (
+                        <motion.p
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: reduceMotion ? 0.6 : 3, duration: reduceMotion ? 0.3 : 1.4 }}
+                          className="mt-4 font-display text-sm text-gold-200/70"
+                        >
+                          &mdash; Ajay ❤️
                         </motion.p>
                       )}
                     </AnimatePresence>

@@ -2,8 +2,8 @@ import { motion } from 'framer-motion'
 import { firstMeeting } from '../data/config.js'
 import PhotoFrame from './PhotoFrame.jsx'
 
-// Drop your college photo at public/images/lucknow.jpg and it'll show up here.
-const PHOTO = '/images/lucknow.jpg'
+// Drop your college photo at public/images/college.jpg and it'll show up here.
+const PHOTO = '/images/college.jpg'
 
 export default function FirstMeeting() {
   return (
@@ -33,9 +33,14 @@ export default function FirstMeeting() {
         >
           <h2 className="mb-6 font-display text-3xl font-medium text-mist md:text-4xl">{firstMeeting.title} ❤️</h2>
           <div className="max-w-md space-y-4 font-display italic leading-relaxed text-mist/60">
-            {firstMeeting.description.split('\n\n').map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
+            {firstMeeting.description.split('\n\n').map((para, i, all) => {
+              const isClosing = i >= all.length - 2
+              return (
+                <p key={i} className={isClosing ? 'pt-2 text-lg text-gold-200/80' : ''}>
+                  {para}
+                </p>
+              )
+            })}
           </div>
         </motion.div>
       </div>
