@@ -83,6 +83,11 @@ export default function TimeTogether() {
           So many days. So many memories. One beautiful story.
         </motion.p>
       </div>
+
+      {/* Pure negative space before the next chapter — its own
+          "Before all the memories…" opening (PhotoStory.jsx) does the
+          transition, so nothing is duplicated here. */}
+      <div className="h-16 sm:h-24" aria-hidden="true" />
     </section>
   )
 }
