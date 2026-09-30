@@ -5,8 +5,10 @@ import { useMusic } from '../context/MusicContext.jsx'
 import StarField from './StarField.jsx'
 
 // The most intimate existing couple photo in the project — used as
-// the final cinematic reveal image. No new asset needed.
-const heroPhoto = { image: '/images/final-photo.jpg', focus: '50% 32%' }
+// the final cinematic reveal image. No new asset needed. Shown with
+// object-contain (see the photo step below) so the full photo is
+// always visible — no crop position needed.
+const heroPhoto = { image: '/images/final-photo.jpg' }
 
 const storyStartLabel = new Date(storyStartDate).toLocaleDateString('en-GB', {
   day: 'numeric',
@@ -15,8 +17,10 @@ const storyStartLabel = new Date(storyStartDate).toLocaleDateString('en-GB', {
 })
 
 // Each step's on-screen time before the next one appears (ms).
-// Halved automatically for prefers-reduced-motion below.
-const STEP_DELAYS = [1600, 2200, 2200, 3200, 2400, 2200, 2600, 2200]
+// Halved automatically for prefers-reduced-motion below. The photo
+// step (index 4) holds for ~5s total: 1s fade-in, a 3s subtle-zoom
+// hold, then a 1s fade-out plays as this step exits.
+const STEP_DELAYS = [1600, 2200, 2200, 3200, 4000, 2200, 2600, 2200]
 
 export default function SecretReveal() {
   const music = useMusic()
@@ -129,19 +133,27 @@ export default function SecretReveal() {
                 )}
 
                 {step === 4 && (
-                  <motion.div key="s4" className="flex flex-col items-center gap-4">
+                  <motion.div
+                    key="s4"
+                    exit={{ opacity: 0, transition: { duration: reduceMotion ? 0.3 : 1, ease: 'easeInOut' } }}
+                    className="flex flex-col items-center gap-4"
+                  >
+                    {/* Fade-in (0-1s): opacity + blur only, on its own layer */}
                     <motion.div
-                      initial={{ opacity: 0, scale: reduceMotion ? 1 : 1.02, filter: reduceMotion ? 'blur(0px)' : 'blur(10px)' }}
-                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                      transition={{ duration: reduceMotion ? 0.4 : 1.8, ease: 'easeOut' }}
-                      className="overflow-hidden rounded-2xl shadow-glow"
+                      initial={{ opacity: 0, filter: reduceMotion ? 'blur(0px)' : 'blur(10px)' }}
+                      animate={{ opacity: 1, filter: 'blur(0px)' }}
+                      transition={{ duration: reduceMotion ? 0.4 : 1, ease: 'easeOut' }}
+                      className="aspect-video w-full max-w-xs overflow-hidden rounded-2xl bg-ink-950/60 shadow-glow sm:max-w-sm"
                       style={{ boxShadow: '0 20px 60px -20px rgba(0,0,0,0.6)' }}
                     >
-                      <img
+                      {/* Slow zoom (1-4s): independent transform layer, doesn't fight the fade above */}
+                      <motion.img
                         src={heroPhoto.image}
                         alt="Ajay and Arpita, close together"
-                        className="h-72 w-56 object-cover sm:h-80 sm:w-64"
-                        style={{ objectPosition: heroPhoto.focus }}
+                        initial={{ scale: reduceMotion ? 1 : 1.0 }}
+                        animate={{ scale: reduceMotion ? 1 : 1.035 }}
+                        transition={{ duration: reduceMotion ? 0.4 : 3, delay: reduceMotion ? 0 : 1, ease: 'easeOut' }}
+                        className="h-full w-full object-contain"
                       />
                     </motion.div>
                     <motion.p
