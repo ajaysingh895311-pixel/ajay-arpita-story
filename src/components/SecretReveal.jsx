@@ -20,7 +20,7 @@ const storyStartLabel = new Date(storyStartDate).toLocaleDateString('en-GB', {
 // Halved automatically for prefers-reduced-motion below. The photo
 // step (index 4) holds for ~5s total: 1s fade-in, a 3s subtle-zoom
 // hold, then a 1s fade-out plays as this step exits.
-const STEP_DELAYS = [1600, 2200, 2200, 3200, 4000, 2200, 2600, 2200]
+const STEP_DELAYS = [1600, 2200, 2200, 3200, 5000, 2200, 2600, 2200, 4200]
 
 export default function SecretReveal() {
   const music = useMusic()
@@ -241,6 +241,15 @@ export default function SecretReveal() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* The final scene slowly fades to black, like the end of a film. */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-20 bg-black"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: step >= 9 ? 1 : 0 }}
+        transition={{ duration: reduceMotion ? 0.4 : 3.5, ease: 'easeInOut' }}
+      />
     </section>
   )
 }

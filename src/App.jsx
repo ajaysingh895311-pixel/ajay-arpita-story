@@ -20,9 +20,13 @@ import FinalLetter from './components/FinalLetter.jsx'
 import SecretReveal from './components/SecretReveal.jsx'
 import MusicToggle from './components/MusicToggle.jsx'
 import CinematicBackground from './components/CinematicBackground.jsx'
+import OpeningCurtain from './components/OpeningCurtain.jsx'
+import ChapterProgress from './components/ChapterProgress.jsx'
+import HiddenSecret from './components/HiddenSecret.jsx'
 
 function Site() {
   const [gateOpen, setGateOpen] = useState(true)
+  const [openingDone, setOpeningDone] = useState(false)
   // The birthday chapter (letter + final surprise) stays closed until
   // she opens it from the unlocked birthday section.
   const [chapterOpen, setChapterOpen] = useState(false)
@@ -60,11 +64,13 @@ function Site() {
   return (
     <>
       {gateOpen && <SongGate onDone={() => setGateOpen(false)} />}
+      {!gateOpen && !openingDone && <OpeningCurtain onDone={() => setOpeningDone(true)} />}
 
       <CinematicBackground mood={mood} />
+      {openingDone && <ChapterProgress mood={mood} />}
 
       <main className="relative z-10">
-        <Hero onBegin={scrollToStory} />
+        {openingDone && <Hero onBegin={scrollToStory} />}
 
         <div ref={storyRef}>
           <Universe />
@@ -92,6 +98,9 @@ function Site() {
         <footer className="bg-gradient-to-b from-transparent to-ink-950 px-4 pb-12 pt-20 text-center">
           <p className="mb-4 font-body text-[11px] tracking-[0.35em] text-gold-300/25">16 &bull; 06 &bull; 2019 &rarr; &infin;</p>
           <p className="font-display italic text-xs text-mist/30">made with love, one line of code at a time</p>
+          <div>
+            <HiddenSecret />
+          </div>
         </footer>
 
         <MusicToggle />
